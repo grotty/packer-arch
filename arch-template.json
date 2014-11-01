@@ -1,6 +1,6 @@
 {
     "variables": {
-        "iso_url": "https://mirrors.kernel.org/archlinux/iso/2014.10.01/archlinux-2014.10.01-dual.iso",
+        "iso_url": "http://www.mirrorservice.org/sites/ftp.archlinux.org/iso/2014.10.01/archlinux-2014.10.01-dual.iso",
         "iso_checksum": "db8de6927d585b8d7dee63b4cb0bc1fb787b2cad",
         "iso_checksum_type": "sha1"
     },
@@ -22,25 +22,7 @@
             ],
             "disk_size": 20480,
             "hard_drive_interface": "sata",
-            "ssh_username": "root",
-            "ssh_password": "vagrant",
-            "shutdown_command": "systemctl start poweroff.timer"
-        },
-        {
-            "type": "vmware-iso",
-            "iso_url": "{{user `iso_url`}}",
-            "iso_checksum": "{{user `iso_checksum`}}",
-            "iso_checksum_type": "{{user `iso_checksum_type`}}",
-            "http_directory": ".",
-            "boot_wait": "5s",
-            "boot_command": [
-                "<enter><wait10><wait10>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/install-vmware.sh<enter><wait5>",
-                "/usr/bin/curl -O http://{{.HTTPIP}}:{{.HTTPPort}}/poweroff.timer<enter><wait5>",
-                "/usr/bin/bash ./install-vmware.sh<enter>"
-            ],
-            "disk_size": 20480,
-            "ssh_username": "root",
+            "ssh_username": "vagrant",
             "ssh_password": "vagrant",
             "shutdown_command": "systemctl start poweroff.timer"
         }
@@ -48,7 +30,7 @@
     "post-processors": [
         {
             "type": "vagrant",
-            "output": "packer_arch_{{.Provider}}.box"
+            "output": "arch64_1410.box"
         }
     ]
 }
